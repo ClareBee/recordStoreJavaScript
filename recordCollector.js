@@ -69,8 +69,10 @@ RecordCollector.prototype = {
   },
   orderRecordsByPriceAsc: function(){
     return _.orderBy(this.collection, ["price"], ["asc"]);
-  }
-
+  },
+  orderRecordsByPriceDesc: function(){
+    return _.orderBy(this.collection, ["price"], ["desc"]);
+  },
 
 
 }
