@@ -11,13 +11,19 @@ describe('record collector', function(){
   it('should have a name', function(){
     assert.strictEqual(bob.name, "Bob");
   });
+  it('should have an empty collection first', function(){
+    assert.strictEqual(bob.recordNum(), 0);
+  });
   it('should have a collection of records', function(){
-    bob.getRecord(record);
+    bob.getsRecord(record);
     assert.strictEqual(bob.collection.length, 1);
+    assert.strictEqual(bob.recordNum(), 1);
   });
   it('should be able to sell a record', function(){
-    bob.sellRecord(record);
+    bob.sellsRecord(record);
     assert.strictEqual(bob.cash, 8);
-    assert.strictEqual(bob.collection.recordNum(), 0);
+    assert.strictEqual(bob.recordNum(), 0);
   });
+
+
 })
