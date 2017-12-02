@@ -33,16 +33,36 @@ RecordCollector.prototype = {
       }
     this.cash += record.price;
   },
-  buysRecord: function(record){
-    if(_.includes(this.collection, record) && this.cash > record.price){
+  buysRecord: function(record, recordstore){
+    if(_.includes(this.collection, record) && this.cash > record.price && _.includes(recordstore.inventory, record)){
       record.quantity += 1;
       this.cash -= record.price;
-    } else if(this.cash > record.price){
+      recordstore.sellRecord(record);
+    } else if((this.cash > record.price) && _.includes(recordstore.inventory, record)){
       this.collection.push(record);
       this.cash -= record.price;
-    } else {
+      recordstore.sellRecord(record);
+    } else if(this.cash < record.price){
       return "Sorry, not enough cash!"
+    } else {
+      return "Sorry this store doesn't have that record in stock."
     }
+  },
+  checkValue: function(){
+    var totalValue = 0;
+    _.forEach(this.collection, function(item){
+      totalValue += (item.quantity * item.price);
+    })
+    return totalValue;
+  },
+  checkValueByGenre: function(genre){
+    var subtotal = 0;
+    _.forEach(this.collection, function(item){
+      if(item.genre === genre){
+        subtotal += item.price;
+      }
+    });
+    return subtotal;
   }
 
 }
