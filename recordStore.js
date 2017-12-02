@@ -33,6 +33,10 @@ RecordStore.prototype = {
   // },
   sellRecord: function(record){
     this.balance += record.price;
+  },
+  financialReport: function(){
+    var inventoryValue = _.sumBy(this.inventory, "price");
+    return "Balance: £" + this.balance + ", Inventory Value: £" + inventoryValue;
   }
 
 }
