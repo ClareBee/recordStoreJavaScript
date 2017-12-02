@@ -32,7 +32,7 @@ RecordStore.prototype = {
   //   return briefInventory;
   // },
   sellRecord: function(record){
-    this.balance -= record.price;
+    this.balance += record.price;
   }
 
 }

@@ -41,6 +41,6 @@ describe('record store tests', function(){
   it('should be able to sell a record and adjust the balance', function(){
     var recordstore2 = new RecordStore("Big Sue's", "Aberdeen", 100);
     recordstore2.sellRecord(record);
-    assert.strictEqual(recordstore2.balance, 92);
+    assert.strictEqual(recordstore2.balance, 108);
   });
 })
