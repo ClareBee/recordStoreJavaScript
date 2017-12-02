@@ -32,6 +32,7 @@ describe('record collector', function(){
     bob.getsCash(10);
     bob.buysRecord(record);
     assert.strictEqual(bob.cash, 2);
+    assert.strictEqual(bob.recordNum(), 1);
   });
 
 })
