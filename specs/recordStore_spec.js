@@ -8,7 +8,7 @@ describe('record store tests', function(){
   beforeEach(function(){
     record = new Record("Bat For Lashes", "Daniel", "Alternative", 8);
     record2 = new Record("C Duncan", "Say", "Alternative", 6);
-    recordstore = new RecordStore("Big Al's", "Glasgow", [], 0);
+    recordstore = new RecordStore("Big Al's", "Glasgow", 0);
   });
 
   it('should have a name', function(){
@@ -37,5 +37,10 @@ describe('record store tests', function(){
     recordstore.addRecord(record);
     recordstore.addRecord(record2);
     assert.deepStrictEqual(recordstore.listInventoryNameTitle(), ["Bat For Lashes - Daniel", "C Duncan - Say"]);
-  })
+  });
+  it('should be able to sell a record and adjust the balance', function(){
+    var recordstore2 = new RecordStore("Big Sue's", "Aberdeen", 100);
+    recordstore2.sellRecord(record);
+    assert.strictEqual(recordstore2.balance, 108);
+  });
 })
