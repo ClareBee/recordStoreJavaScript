@@ -33,13 +33,15 @@ RecordCollector.prototype = {
       }
     this.cash += record.price;
   },
-  buysRecord: function(record){
+  buysRecord: function(record, recordstore){
     if(_.includes(this.collection, record) && this.cash > record.price){
       record.quantity += 1;
       this.cash -= record.price;
+      recordstore.sellRecord(record);
     } else if(this.cash > record.price){
       this.collection.push(record);
       this.cash -= record.price;
+      recordstore.sellRecord(record);
     } else {
       return "Sorry, not enough cash!"
     }
