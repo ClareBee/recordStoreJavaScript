@@ -34,5 +34,8 @@ describe('record collector', function(){
     assert.strictEqual(bob.cash, 2);
     assert.strictEqual(bob.recordNum(), 1);
   });
+  it('should not be able to buy without cash', function(){
+    assert.strictEqual(bob.buysRecord(record), "Sorry, not enough cash!");
+  })
 
 })
