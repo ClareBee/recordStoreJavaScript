@@ -80,7 +80,7 @@ describe('record collector', function(){
     bob.getsRecord(record2);
     assert.strictEqual(bill.checkValue(), 16);
     assert.strictEqual(bob.checkValue(), 12);
-    assert.strictEqual(bob.compareCollection(bill), "Bob's collection is worth £2 more than Bill's.")
+    assert.strictEqual(bob.compareCollection(bill), "At £16, Bill's collection is worth £4 more than Bob's.")
   })
 
 })
