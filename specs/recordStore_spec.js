@@ -64,5 +64,6 @@ describe('record store tests', function(){
     recordstore.addRecord(record3);
     assert.deepStrictEqual(recordstore.byGenre("Alternative"), [record, record2]);
     assert.deepStrictEqual(recordstore.byGenre("Electronic"), [record3]);
+    assert.deepStrictEqual(recordstore.byGenre("Heavy Metal"), "Sorry, that genre is not available.");
   })
 })

@@ -39,6 +39,19 @@ RecordStore.prototype = {
   financialReport: function(){
     var inventoryValue = _.sumBy(this.inventory, "price");
     return "Balance: £" + this.balance + ", Inventory Value: £" + inventoryValue;
+  },
+  byGenre: function(genre){
+    var sorted = [];
+    _.forEach(this.inventory, function(item){
+      if(item.genre === genre){
+        sorted.push(item);
+      }
+    });
+    if(sorted.length > 0){
+      return sorted;
+    }else {
+      return "Sorry, that genre is not available."
+    }
   }
 
 }
