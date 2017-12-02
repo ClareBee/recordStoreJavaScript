@@ -1,10 +1,10 @@
 var _ = require('lodash');
 
-var RecordStore = function(name, city){
+var RecordStore = function(name, city, balance){
   this.name = name;
   this.city = city;
   this.inventory = [];
-  this.balance = 0;
+  this.balance = balance;
 }
 
 RecordStore.prototype = {
@@ -31,7 +31,9 @@ RecordStore.prototype = {
   //   });
   //   return briefInventory;
   // },
-
+  sellRecord: function(record){
+    this.balance -= record.price;
+  }
 
 }
 
