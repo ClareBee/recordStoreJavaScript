@@ -24,7 +24,6 @@ describe('record collector', function(){
   });
   it('should have a collection of records', function(){
     bob.getsRecord(record);
-    assert.strictEqual(bob.collection.length, 1);
     assert.strictEqual(bob.recordNum(), 1);
   });
   it('should be able to sell a record', function(){
@@ -72,6 +71,16 @@ describe('record collector', function(){
     bob.getsRecord(record);
     bob.getsRecord(record2);
     assert.deepStrictEqual(bob.orderRecordsByPriceDesc(), [record, record2]);
+  });
+  it('should be able to compare collection value to another collector', function(){
+    var bill = new RecordCollector("Bill");
+    bill.getsRecord(record);
+    bill.getsRecord(record);
+    bob.getsRecord(record2);
+    bob.getsRecord(record2);
+    assert.strictEqual(bill.checkValue(), 16);
+    assert.strictEqual(bob.checkValue(), 12);
+    assert.strictEqual(bob.compareCollection(bill), "Bob's collection is worth £2 more than Bill's.")
   })
 
 })

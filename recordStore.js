@@ -9,28 +9,20 @@ var RecordStore = function(name, city){
 
 RecordStore.prototype = {
   addRecord: function(record){
-    if(_.includes(this.inventory, record)){
-      record.quantity += 1;
-    }else{
       this.inventory.push(record);
-    }
   },
   numOfRecords: function(){
-    var total = 0;
-    _.forEach(this.inventory, function(item){
-      total += item.quantity;
-    })
-    return total;
+    return _.size(this.inventory);
   },
   listInventory: function(){
-    var inventoryListed = _.map(this.inventory, function(item){
+    var sorted = _.sortBy(this.inventory, "artist");
+    return _.map(sorted, function(item){
       return item.details();
     });
-    return inventoryListed;
   },
   listInventoryNameTitle: function(){
     var briefInventory = _.map(this.inventory, function(item){
-      return item.artist + " - " + item.title + " x " + item.quantity;
+      return item.artist + " - " + item.title;
     });
     return briefInventory;
   },
@@ -43,18 +35,15 @@ RecordStore.prototype = {
   //   return briefInventory;
   // },
   sellRecord: function(record){
-    if(_.includes(this.inventory, record) && record.quantity > 1){
-        record.quantity -= 1;
-      }
-    else if(_.includes(this.inventory, record) && record.quantity === 1){
+    if(_.includes(this.inventory, record)){
         _.remove(this.inventory, record);
+        this.balance += record.price;
+      }else {
+        return "This record is not in stock."
       }
-    this.balance += record.price;
   },
   financialReport: function(){
-    var inventoryValue = _.sumBy(this.inventory, function(item){
-      return item.price * item.quantity;
-    });
+    var inventoryValue = _.sumBy(this.inventory, "price");
     return "Balance: £" + this.balance + ", Inventory Value: £" + inventoryValue;
   },
   byGenre: function(genre){
