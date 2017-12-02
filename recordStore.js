@@ -14,26 +14,34 @@ RecordStore.prototype = {
   numOfRecords: function(){
     return _.size(this.inventory);
   },
+  numByTitle: function(title){
+    var counted =  _.countBy(this.inventory, function(item){
+      if(item.title === title){
+        return item;
+      }
+    });
+    return _.values(counted)[0];
+  },
+  // listInventory: function(){
+  //   var self = this;
+  //   return _.forEach(this.inventory, function(item){
+  //     var counter = this.numByTitle(item.title);
+  //     return counter + " : " + item.details();
+  //   });
+  // },
   listInventory: function(){
     var sorted = _.sortBy(this.inventory, "artist");
-    return _.map(sorted, function(item){
+    return _.map(this.inventory, function(item){
       return item.details();
     });
   },
-  listInventoryNameTitle: function(){
-    var briefInventory = _.map(this.inventory, function(item){
-      return item.artist + " - " + item.title;
+  listInventoryWithQuantity: function(){
+    var sorted = _.groupBy(this.inventory, "artist");
+    return basics = _.map(sorted, function(items, artist){
+       var obj = {artist, count: items.length};
+       return obj["artist"] + ": " + obj["count"] + " entries.";
     });
-    return briefInventory;
   },
-  // listInventoryNameTitle: function(){
-  //   var briefInventory = _.map(this.inventory, function(item){
-  //     var newEntry = {};
-  //     newEntry[item.artist] = item.title;
-  //     return newEntry;
-  //   });
-  //   return briefInventory;
-  // },
   sellRecord: function(record){
     if(_.includes(this.inventory, record)){
         _.remove(this.inventory, record);
