@@ -3,11 +3,12 @@ var Record = function(artist, title, genre, price){
   this.title = title;
   this.genre = genre;
   this.price = price;
+  this.quantity = 1;
 }
 
 Record.prototype = {
   details: function(){
-    return this.title + " by " + this.artist + ". Its genre is " + this.genre + " and it costs £" + this.price + ".";
+    return this.quantity + " of " + this.title + " by " + this.artist + ". Its genre is " + this.genre + " and it costs £" + this.price + ".";
   }
 }
 
