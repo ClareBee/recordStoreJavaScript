@@ -32,9 +32,8 @@ RecordStore.prototype = {
   //   return briefInventory;
   // },
   sellRecord: function(record){
-    _.remove(this.inventory, function(item){
-      return item.name === record.name;
-    })
+    if(_.includes(this.inventory, record)){
+    _.remove(this.inventory, record)}
     this.balance += record.price;
   },
   financialReport: function(){
