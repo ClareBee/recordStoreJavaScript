@@ -22,17 +22,17 @@ RecordStore.prototype = {
     });
     return _.values(counted)[0];
   },
-  // listInventory: function(){
-  //   var self = this;
-  //   return _.forEach(this.inventory, function(item){
-  //     var counter = this.numByTitle(item.title);
-  //     return counter + " : " + item.details();
-  //   });
-  // },
   listInventory: function(){
     var sorted = _.sortBy(this.inventory, "artist");
     return _.map(this.inventory, function(item){
       return item.details();
+    });
+  },
+  listInventoryWithCounter: function(){
+    var self = this;
+    return _.forEach(this.inventory, function(item){
+      var counter = this.numByTitle(item.title);
+      return counter + " : " + item.details();
     });
   },
   listInventoryWithQuantity: function(){

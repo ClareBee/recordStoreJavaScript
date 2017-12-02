@@ -39,6 +39,11 @@ describe('record store tests', function(){
     recordstore.addRecord(record2);
     assert.deepStrictEqual(recordstore.listInventory(), ["Bat For Lashes - Daniel. Genre: Alternative. Price: £8.", "C Duncan - Say. Genre: Alternative. Price: £6."]);
   });
+  it('should be able to include a counter in the inventory', function(){
+    recordstore.addRecord(record);
+    recordstore.addRecord(record);
+    assert.deepStrictEqual(recordstore.listInventoryWithQuantity(), ["Bat For Lashes - Daniel x 2"]);
+  })
   it('should be able to include quantity where there are duplicates', function(){
     recordstore.addRecord(record);
     recordstore.addRecord(record);
