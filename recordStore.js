@@ -15,12 +15,13 @@ RecordStore.prototype = {
     return _.size(this.inventory);
   },
   numByTitle: function(title){
-    var counted =  _.countBy(this.inventory, function(item){
+    var counted = [];
+    this.inventory.forEach(function(item){
       if(item.title === title){
-        return item;
+        counted.push(item);
       }
     });
-    return _.values(counted)[0];
+    return _.size(counted);
   },
   listInventory: function(){
     var sorted = _.sortBy(this.inventory, "artist");
@@ -30,10 +31,11 @@ RecordStore.prototype = {
   },
   listInventoryWithCounter: function(){
     var self = this;
-    return _.forEach(this.inventory, function(item){
+    var listed = _.map(this.inventory, function(item){
       var counter = this.numByTitle(item.title);
-      return counter + " : " + item.details();
-    });
+      return item.artist + " - " + item.title + " x " + counter;
+    }.bind(this));
+    return _.uniq(listed);
   },
   listInventoryWithQuantity: function(){
     var sorted = _.groupBy(this.inventory, "artist");

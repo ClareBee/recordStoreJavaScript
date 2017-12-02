@@ -69,10 +69,8 @@ RecordCollector.prototype = {
       higher = collector;
       lower = this;
     }
-
     return "At £" + higher.checkValue() + ", " + higher.name + "'s collection is worth £" + (higher.checkValue() - lower.checkValue()) + " more than " + lower.name + "'s.";
   }
-
 
 }
 

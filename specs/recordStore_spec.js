@@ -42,7 +42,8 @@ describe('record store tests', function(){
   it('should be able to include a counter in the inventory', function(){
     recordstore.addRecord(record);
     recordstore.addRecord(record);
-    assert.deepStrictEqual(recordstore.listInventoryWithQuantity(), ["Bat For Lashes - Daniel x 2"]);
+    recordstore.addRecord(record2);
+    assert.deepStrictEqual(recordstore.listInventoryWithCounter(), ["Bat For Lashes - Daniel x 2", "C Duncan - Say x 1"]);
   })
   it('should be able to include quantity where there are duplicates', function(){
     recordstore.addRecord(record);
@@ -54,7 +55,9 @@ describe('record store tests', function(){
   it('should be able to count duplicates', function(){
     recordstore.addRecord(record);
     recordstore.addRecord(record);
-    assert.strictEqual(recordstore.numByTitle("Bat For Lashes"), 2);
+    recordstore.addRecord(record2);
+    assert.strictEqual(recordstore.numByTitle("Daniel"), 2);
+    assert.strictEqual(recordstore.numByTitle("Say"), 1);
   });
   it('should be able to sell a record and adjust the balance', function(){
     var recordstore2 = new RecordStore("Big Sue's", "Aberdeen");
