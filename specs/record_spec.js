@@ -18,4 +18,7 @@ describe("record test", function(){
   it('should have a price', function(){
     assert.strictEqual(record.price, 6);
   });
+  it('should show its details as a string', function(){
+    assert.strictEqual(record.details(), "This record is Say by C Duncan, its genre is Alternative and it costs £6.")
+  })
 })
