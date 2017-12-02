@@ -57,6 +57,21 @@ describe('record collector', function(){
     bob.buysRecord(record, recordstore);
     bob.buysRecord(record2, recordstore);
     assert.strictEqual(bob.checkValueByGenre("Alternative"), 14);
+  });
+  it('should be able to find most valuable record', function(){
+    bob.getsRecord(record);
+    bob.getsRecord(record2);
+    assert.strictEqual(bob.mostValuable(), record);
+  }),
+  it('should be able to sort by value, ascending', function(){
+    bob.getsRecord(record);
+    bob.getsRecord(record2);
+    assert.deepStrictEqual(bob.orderRecordsByPriceAsc(), [record2, record]);
+  });
+  it('should be able to sort by value, descending', function(){
+    bob.getsRecord(record);
+    bob.getsRecord(record2);
+    assert.deepStrictEqual(bob.orderRecordsByPriceDesc(), [record, record2]);
   })
 
 })

@@ -59,11 +59,21 @@ RecordCollector.prototype = {
     var subtotal = 0;
     _.forEach(this.collection, function(item){
       if(item.genre === genre){
-        subtotal += item.price;
+        subtotal += (item.price * item.quantity);
       }
     });
     return subtotal;
-  }
+  },
+  mostValuable: function(){
+    return _.maxBy(this.collection, "price");
+  },
+  orderRecordsByPriceAsc: function(){
+    return _.orderBy(this.collection, ["price"], ["asc"]);
+  },
+  orderRecordsByPriceDesc: function(){
+    return _.orderBy(this.collection, ["price"], ["desc"]);
+  },
+
 
 }
 
