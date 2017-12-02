@@ -7,7 +7,7 @@ var Record = function(artist, title, genre, price){
 
 Record.prototype = {
   details: function(){
-    return "This record is " + this.title + " by " + this.artist + ", its genre is " + this.genre + " and it costs £" + this.price + ".";
+    return this.title + " by " + this.artist + ". Its genre is " + this.genre + " and it costs £" + this.price + ".";
   }
 }
 

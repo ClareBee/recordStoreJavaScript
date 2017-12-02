@@ -7,6 +7,7 @@ describe('record store tests', function(){
 
   beforeEach(function(){
     record = new Record("Bat For Lashes", "Daniel", "Alternative", 8);
+    record2 = new Record("C Duncan", "Say", "Alternative", 6);
     recordstore = new RecordStore("Big Al's", "Glasgow", [], 0);
   });
 
@@ -27,4 +28,15 @@ describe('record store tests', function(){
     recordstore.addRecord(record);
     assert.strictEqual(recordstore.inventory.length, 1);
   });
+  it('should be able to list its inventory as string', function(){
+    recordstore.addRecord(record);
+    recordstore.addRecord(record2);
+    assert.deepStrictEqual(recordstore.listInventory(), ["Daniel by Bat For Lashes. Its genre is Alternative and it costs £8.", "Say by C Duncan. Its genre is Alternative and it costs £6."]);
+  });
+  it('should be able to list its inventory by artist and title', function(){
+    recordstore.addRecord(record);
+    recordStore.addRecord(record2);
+    assert.deepStrictEqual(recordstore.listInventoryNameTitle(), ["Bat for Lashes - Daniel", "C Duncan - Say"]);
+
+  })
 })
