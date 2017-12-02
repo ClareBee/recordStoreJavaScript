@@ -59,6 +59,19 @@ RecordCollector.prototype = {
   orderRecordsByPriceDesc: function(){
     return _.orderBy(this.collection, ["price"], ["desc"]);
   },
+  compareCollection: function(collector){
+    var higher = {};
+    var lower = {};
+    if(this.checkValue() > collector.checkValue()){
+      higher = this;
+      lower = collector;
+    } else {
+      higher = collector;
+      lower = this;
+    }
+
+    return "At £" + higher.checkValue() + ", " + higher.name + "'s collection is worth £" + (higher.checkValue() - lower.checkValue()) + " more than " + lower.name + "'s.";
+  }
 
 
 }
