@@ -26,5 +26,5 @@ describe('record store tests', function(){
   it('should be able to add a record to its inventory', function(){
     recordstore.addRecord(record);
     assert.strictEqual(recordstore.inventory.length, 1);
-  })
+  });
 })
