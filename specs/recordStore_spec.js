@@ -43,4 +43,7 @@ describe('record store tests', function(){
     recordstore2.sellRecord(record);
     assert.strictEqual(recordstore2.balance, 108);
   });
+  it('should be able to give a financial report, showing balance and value of inventory', function(){
+    assert.strictEqual(recordstore.financialReport(), "Balance: £0, Inventory Value: £0");
+  })
 })
