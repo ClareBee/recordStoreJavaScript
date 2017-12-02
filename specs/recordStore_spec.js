@@ -7,7 +7,7 @@ describe('record store tests', function(){
 
   beforeEach(function(){
     record = new Record("Bat For Lashes", "Daniel", "Alternative", 8);
-    recordstore = new RecordStore("Big Al's", "Glasgow", []);
+    recordstore = new RecordStore("Big Al's", "Glasgow", [], 0);
   });
 
   it('should have a name', function(){
@@ -20,4 +20,7 @@ describe('record store tests', function(){
   it('should have an empty inventory', function(){
     assert.deepStrictEqual(recordstore.inventory, []);
   });
+  it('should have a balance', function(){
+    assert.strictEqual(recordstore.balance, 0);
+  })
 })
