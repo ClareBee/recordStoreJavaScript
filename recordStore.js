@@ -17,12 +17,20 @@ RecordStore.prototype = {
     });
     return inventoryListed;
   },
+  // listInventoryNameTitle: function(){
+  //   var briefInventory = _.map(this.inventory, function(item){
+  //     return item.artist + " - " + item.title;
+  //   });
+  //   return briefInventory;
+  // },
   listInventoryNameTitle: function(){
     var briefInventory = _.map(this.inventory, function(item){
-      return item.artist + " - " + item.title;
+      var newEntry = {};
+      newEntry[item.artist] = item.title;
+      return newEntry;
     });
     return briefInventory;
-  }
+  },
 
 
 }
