@@ -55,6 +55,14 @@ describe('record store tests', function(){
     recordstore.addRecord(record);
     recordstore.addRecord(record2);
     recordstore.sellRecord(record);
-    assert.strictEqual(recordstore.financialReport(), "Balance: £8, Inventory Value: £6");  
+    assert.strictEqual(recordstore.financialReport(), "Balance: £8, Inventory Value: £6");
+  });
+  it('should be able to carry out a search by genre', function(){
+    record3 = new Record("Cosmopolitan", "Mome", "Electronic", 9);
+    recordstore.addRecord(record);
+    recordstore.addRecord(record2);
+    recordstore.addRecord(record3);
+    assert.deepStrictEqual(recordstore.byGenre("Alternative"), [record, record2]);
+    assert.deepStrictEqual(recordstore.byGenre("Electronic"), [record3]);
   })
 })
