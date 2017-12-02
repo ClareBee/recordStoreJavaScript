@@ -8,7 +8,7 @@ describe('record store tests', function(){
   beforeEach(function(){
     record = new Record("Bat For Lashes", "Daniel", "Alternative", 8);
     record2 = new Record("C Duncan", "Say", "Alternative", 6);
-    recordstore = new RecordStore("Big Al's", "Glasgow", 0);
+    recordstore = new RecordStore("Big Al's", "Glasgow");
   });
 
   it('should have a name', function(){
@@ -45,9 +45,9 @@ describe('record store tests', function(){
     assert.deepStrictEqual(recordstore.listInventoryNameTitle(), ["Bat For Lashes - Daniel x 1", "C Duncan - Say x 1"]);
   });
   it('should be able to sell a record and adjust the balance', function(){
-    var recordstore2 = new RecordStore("Big Sue's", "Aberdeen", 100);
+    var recordstore2 = new RecordStore("Big Sue's", "Aberdeen");
     recordstore2.sellRecord(record);
-    assert.strictEqual(recordstore2.balance, 108);
+    assert.strictEqual(recordstore2.balance, 8);
   });
   it('should be able to give a financial report, showing balance and value of inventory', function(){
     assert.strictEqual(recordstore.financialReport(), "Balance: £0, Inventory Value: £0");
