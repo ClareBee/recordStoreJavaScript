@@ -11,18 +11,10 @@ RecordCollector.prototype = {
     this.cash += cash;
   },
   getsRecord: function(record){
-    if(_.includes(this.collection, record)){
-      record.quantity += 1;
-    } else {
-      this.collection.push(record);
-    }
+    this.collection.push(record);
   },
   recordNum: function(){
-    var total = 0;
-    _.forEach(this.collection, function(item){
-      total += item.quantity;
-    });
-    return total;
+    return _.size(this.collection);
   },
   sellsRecord: function(record){
     if(_.includes(this.collection, record) && record.collection > 1){
@@ -49,20 +41,14 @@ RecordCollector.prototype = {
     }
   },
   checkValue: function(){
-    var totalValue = 0;
-    _.forEach(this.collection, function(item){
-      totalValue += (item.quantity * item.price);
-    })
-    return totalValue;
+    return _.sumBy(this.collection, "price");
   },
   checkValueByGenre: function(genre){
-    var subtotal = 0;
-    _.forEach(this.collection, function(item){
-      if(item.genre === genre){
-        subtotal += (item.price * item.quantity);
-      }
-    });
-    return subtotal;
+    return _.sumBy(this.collection, function(item){
+        if(item.genre === genre){
+          return item.price;
+        };
+      });
   },
   mostValuable: function(){
     return _.maxBy(this.collection, "price");

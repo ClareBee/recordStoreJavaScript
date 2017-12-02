@@ -32,20 +32,21 @@ describe('record store tests', function(){
     recordstore.addRecord(record);
     recordstore.addRecord(record);
     assert.strictEqual(recordstore.numOfRecords(), 2);
-    assert.strictEqual(recordstore.inventory.length, 1);
+    assert.strictEqual(recordstore.inventory.length, 2);
   });
   it('should be able to list its inventory as string', function(){
     recordstore.addRecord(record);
     recordstore.addRecord(record2);
-    assert.deepStrictEqual(recordstore.listInventory(), ["1 of Daniel by Bat For Lashes. Its genre is Alternative and it costs £8.", "1 of Say by C Duncan. Its genre is Alternative and it costs £6."]);
+    assert.deepStrictEqual(recordstore.listInventory(), ["Bat For Lashes - Daniel. Genre: Alternative. Price: £8.", "C Duncan - Say. Genre: Alternative. Price: £6."]);
   });
   it('should be able to list its inventory by artist and title', function(){
     recordstore.addRecord(record);
     recordstore.addRecord(record2);
-    assert.deepStrictEqual(recordstore.listInventoryNameTitle(), ["Bat For Lashes - Daniel x 1", "C Duncan - Say x 1"]);
+    assert.deepStrictEqual(recordstore.listInventoryNameTitle(), ["Bat For Lashes - Daniel", "C Duncan - Say"]);
   });
   it('should be able to sell a record and adjust the balance', function(){
     var recordstore2 = new RecordStore("Big Sue's", "Aberdeen");
+    recordstore2.addRecord(record);
     recordstore2.sellRecord(record);
     assert.strictEqual(recordstore2.balance, 8);
   });
