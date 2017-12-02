@@ -35,8 +35,7 @@ describe('record store tests', function(){
   });
   it('should be able to list its inventory by artist and title', function(){
     recordstore.addRecord(record);
-    recordStore.addRecord(record2);
-    assert.deepStrictEqual(recordstore.listInventoryNameTitle(), ["Bat for Lashes - Daniel", "C Duncan - Say"]);
-
+    recordstore.addRecord(record2);
+    assert.deepStrictEqual(recordstore.listInventoryNameTitle(), ["Bat For Lashes - Daniel", "C Duncan - Say"]);
   })
 })

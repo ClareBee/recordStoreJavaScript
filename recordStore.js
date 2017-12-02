@@ -16,6 +16,12 @@ RecordStore.prototype = {
       return item.details();
     });
     return inventoryListed;
+  },
+  listInventoryNameTitle: function(){
+    var briefInventory = _.map(this.inventory, function(item){
+      return item.artist + " - " + item.title;
+    });
+    return briefInventory;
   }
 
 
