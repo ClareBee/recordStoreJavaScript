@@ -11,6 +11,10 @@ describe('record collector', function(){
   it('should have a name', function(){
     assert.strictEqual(bob.name, "Bob");
   });
+  it('should be able to get cash from the atm', function(){
+    bob.getsCash(20);
+    assert.strictEqual(bob.cash, 20);
+  });
   it('should have an empty collection first', function(){
     assert.strictEqual(bob.recordNum(), 0);
   });
@@ -24,6 +28,10 @@ describe('record collector', function(){
     assert.strictEqual(bob.cash, 8);
     assert.strictEqual(bob.recordNum(), 0);
   });
-
+  it('should be able to buy a record', function(){
+    bob.getsCash(10);
+    bob.buysRecord(record);
+    assert.strictEqual(bob.cash, 2);
+  });
 
 })
