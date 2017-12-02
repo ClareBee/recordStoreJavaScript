@@ -9,7 +9,7 @@ describe('record collector', function(){
   beforeEach(function(){
     bob = new RecordCollector("Bob");
     record = new Record("Say", "C Duncan", "Alternative", 8);
-    record2 = new Record("Dnaiel", "Bat For Lashes", "Alternative", 6);
+    record2 = new Record("Daniel", "Bat For Lashes", "Alternative", 6);
     recordstore = new RecordStore("Big Al's", "Glasgow");
   });
   it('should have a name', function(){
@@ -27,6 +27,7 @@ describe('record collector', function(){
     assert.strictEqual(bob.recordNum(), 1);
   });
   it('should be able to sell a record', function(){
+    bob.getsRecord(record);
     bob.sellsRecord(record);
     assert.strictEqual(bob.cash, 8);
     assert.strictEqual(bob.recordNum(), 0);
@@ -38,6 +39,7 @@ describe('record collector', function(){
     assert.strictEqual(bob.cash, 2);
     assert.strictEqual(bob.recordNum(), 1);
     assert.strictEqual(recordstore.balance, 8);
+    assert.strictEqual(recordstore.numOfRecords(), 0);
   });
   it('should not be able to buy without cash', function(){
     assert.strictEqual(bob.buysRecord(record, recordstore), "Sorry, not enough cash!");
@@ -81,6 +83,6 @@ describe('record collector', function(){
     assert.strictEqual(bill.checkValue(), 16);
     assert.strictEqual(bob.checkValue(), 12);
     assert.strictEqual(bob.compareCollection(bill), "At £16, Bill's collection is worth £4 more than Bob's.")
-  })
+  });
 
 })

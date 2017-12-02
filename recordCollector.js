@@ -17,28 +17,25 @@ RecordCollector.prototype = {
     return _.size(this.collection);
   },
   sellsRecord: function(record){
-    if(_.includes(this.collection, record) && record.collection > 1){
-        record.quantity -= 1;
-      }
-    else if(_.includes(this.collection, record) && record.quantity === 1){
-        _.remove(this.collection, record);
-      }
-    this.cash += record.price;
+    if(_.includes(this.collection, record)){
+      _.remove(this.collection, record);
+      this.cash += record.price;
+    } else {
+      return "You don't have this record in your collection."
+    };
   },
   buysRecord: function(record, recordstore){
-    if(_.includes(this.collection, record) && this.cash > record.price && _.includes(recordstore.inventory, record)){
-      record.quantity += 1;
+    if(this.cash > record.price){
+      recordstore.sendGoods(record);
       this.cash -= record.price;
-      recordstore.sellRecord(record);
-    } else if((this.cash > record.price) && _.includes(recordstore.inventory, record)){
       this.collection.push(record);
-      this.cash -= record.price;
-      recordstore.sellRecord(record);
     } else if(this.cash < record.price){
       return "Sorry, not enough cash!"
-    } else {
-      return "Sorry this store doesn't have that record in stock."
-    }
+    };
+  },
+  receivesGoods: function(record){
+    this.collection.push(record);
+    this.cash -= record.price;
   },
   checkValue: function(){
     return _.sumBy(this.collection, "price");

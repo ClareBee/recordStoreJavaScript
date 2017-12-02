@@ -44,13 +44,22 @@ RecordStore.prototype = {
        return obj["artist"] + ": " + obj["count"] + " entries.";
     });
   },
-  sellRecord: function(record){
+  sellRecord: function(record, customer){
     if(_.includes(this.inventory, record)){
+        customer.receivesGoods(record);
         _.remove(this.inventory, record);
         this.balance += record.price;
-      }else {
+      } else {
         return "This record is not in stock."
       }
+  },
+  sendGoods: function(record){
+    if(_.includes(this.inventory, record)){
+      _.remove(this.inventory, record);
+      this.balance += record.price;
+    } else {
+      return "This record is not in stock."
+    }
   },
   financialReport: function(){
     var inventoryValue = _.sumBy(this.inventory, "price");

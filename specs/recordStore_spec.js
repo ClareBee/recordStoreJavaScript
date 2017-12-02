@@ -1,14 +1,17 @@
 var assert = require('assert');
 var RecordStore = require('../recordStore.js');
 var Record = require('../record.js');
+var RecordCollector = require('../recordCollector.js');
 
 describe('record store tests', function(){
-    var record, recordstore;
+    var record, record2, recordstore, customer;
 
   beforeEach(function(){
     record = new Record("Bat For Lashes", "Daniel", "Alternative", 8);
     record2 = new Record("C Duncan", "Say", "Alternative", 6);
     recordstore = new RecordStore("Big Al's", "Glasgow");
+    customer = new RecordCollector("Bob");
+    customer.getsCash(20);
   });
 
   it('should have a name', function(){
@@ -62,8 +65,12 @@ describe('record store tests', function(){
   it('should be able to sell a record and adjust the balance', function(){
     var recordstore2 = new RecordStore("Big Sue's", "Aberdeen");
     recordstore2.addRecord(record);
-    recordstore2.sellRecord(record);
+    recordstore2.sellRecord(record, customer);
     assert.strictEqual(recordstore2.balance, 8);
+    assert.strictEqual(customer.cash, 12);
+  });
+  it('should not be able to sell a record it does not have', function(){
+    assert.strictEqual(recordstore.sellRecord(record, customer), "This record is not in stock.");
   });
   it('should be able to give a financial report, showing balance and value of inventory', function(){
     assert.strictEqual(recordstore.financialReport(), "Balance: £0, Inventory Value: £0");
@@ -76,8 +83,9 @@ describe('record store tests', function(){
   it('should be able to give a financial report, as above when store has made sales', function(){
     recordstore.addRecord(record);
     recordstore.addRecord(record2);
-    recordstore.sellRecord(record);
+    recordstore.sellRecord(record, customer);
     assert.strictEqual(recordstore.financialReport(), "Balance: £8, Inventory Value: £6");
+    assert.strictEqual(customer.cash, 12);
   });
   it('should be able to carry out a search by genre', function(){
     record3 = new Record("Cosmopolitan", "Mome", "Electronic", 9);
@@ -87,5 +95,5 @@ describe('record store tests', function(){
     assert.deepStrictEqual(recordstore.byGenre("Alternative"), [record, record2]);
     assert.deepStrictEqual(recordstore.byGenre("Electronic"), [record3]);
     assert.deepStrictEqual(recordstore.byGenre("Heavy Metal"), "Sorry, that genre is not available.");
-  })
+  });
 })
